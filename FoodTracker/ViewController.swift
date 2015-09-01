@@ -12,6 +12,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBOutlet weak var tableView: UITableView!
     
+    let kAppId = "80685cca"
+    let kAppKey = "d7e5ab6d7752892bb04082688acb51a1"
+    
     var searchController: UISearchController!
     
     var suggestedSearchFoods: [String] = []
@@ -84,7 +87,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
     }
     
+    //UISearchBarDelegate 
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        makeRequest(searchBar.text)
+    }
+    
+    func makeRequest (searchString : String) {
+        //Making a Get Request
+//        let url = NSURL(string: "https://api.nutritionix.com/v1_1/search/\(searchString)?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&kappId=\(kAppId)&appKey=\(kAppKey)")
+//        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+//            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
+//            println(stringData)
+//            println(response)
+//        })
+//        task.resume()
+    }
     
     
     
