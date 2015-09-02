@@ -102,11 +102,49 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            println(response)
 //        })
 //        task.resume()
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: "https://api.nutritionix.com/v1_1/search/")!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        
+        var params = [
+            "appID": kAppId,
+            "appKey": kAppKey,
+            "fields": ["item_name", "brand_name", "keywords", "usda_fields"],
+            "limit": "50",
+            "query": searchString,
+            "filters": ["exists": ["usda_fields": true]]]
+        var error: NSError?
+        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &error)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: { (data, response, err) -> Void in
+            
+            var stringData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println(stringData)
+            var conversionError: NSError?
+            var jsonDictionary = NSJSONSerialization.dataWithJSONObject(data, options: .MutableLeaves, error: &conversionError) as? NSDictionary
+            println(jsonDictionary)
+        })
+        task.resume()
     }
     
-    
-    
-    
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
