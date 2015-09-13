@@ -11,6 +11,15 @@ import UIKit
 import CoreData
 
 class DataController {
-    
+    class func jsonAsUSDAIdAndNameSearchResults(json: NSDictionary) -> [(name: String, idValue: String)] {
+        var usdaItemSearchResults: [(name: String, idValue: String)]
+        var searchResult: (name: String, idValue: String)
+        
+        if json["hits"] != nil {
+            let results: [AnyObject] = json["hits"]! as [AnyObject]
+            for itemDictionary in results {
+                
+            }
+        }
     }
 }
